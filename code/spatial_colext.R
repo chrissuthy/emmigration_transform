@@ -20,12 +20,16 @@ sp.colext <- nimbleCode({
   #~~~~~~~PRIORS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
     delta ~ dnorm(0,0.368)
-    #gamma ~ dunif(0,10)
+    psi1 ~ dunif(0,1)
     beta0 ~ dnorm(0,0.368)
     beta1 ~ dnorm(0,0.368)
     alpha <- 0.33
 
   #~~~~~~~Likelihood~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+  
+  for(i in 1:nsite){
+    z[i,1] ~ dbern(psi1)
+  }
   
   for(k in 2:nyear){
     for(j in 1:nsite){
