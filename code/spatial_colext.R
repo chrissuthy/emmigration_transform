@@ -30,7 +30,7 @@ sp.colext <- nimbleCode({
   for(k in 2:nyear){
     for(j in 1:nsite){
       logit(delta0[j,k-1]) <- delta
-      delta0_ik[j,k-1] <- delta0[j,k-1] * z[j,k-1] * P[j,k-1]^gamma #P[j,k-1]
+      delta0_ik[j,k-1] <- delta0[j,k-1] * z[j,k-1] * P[j,k-1] #P[j,k-1]^gamma
     }
     for(i in 1:nsite){
       #connectivity [col]
@@ -42,7 +42,7 @@ sp.colext <- nimbleCode({
 
       #transition probs
       col[i,k-1] <- 1 - prod(con[i,1:nsite ,k-1]) 
-      logit(ext[i,k-1]) <- beta0 + beta1 * P[i,k-1] #area[i]
+      logit(ext[i,k-1]) <- beta0 + beta1 * area[i,k-1] #P[i,k-1]
       ext.re[i,k-1] <- ext[i,k-1] * (1-col[i,k-1])
 
       #occupancy
