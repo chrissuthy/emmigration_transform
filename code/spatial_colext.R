@@ -40,7 +40,7 @@ sp.colext <- nimbleCode({
       #connectivity [col]
       for(j in 1:nsite){
         con[i,j,k-1] <- 1 - (delta0_ik[j,k-1] *
-                             exp(-alpha / dmat[i,j]) *
+                             exp(-alpha*dmat[i,j]) *
                              (1 - equals(i,j)))
       }
 
