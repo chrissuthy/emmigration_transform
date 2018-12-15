@@ -33,13 +33,12 @@ sp.colext <- nimbleCode({
   
   for(k in 2:nyear){
     for(j in 1:nsite){
-      logit(delta0[j,k-1]) <- delta
-      delta0_ik[j,k-1] <- delta0[j,k-1] * z[j,k-1] * P[j,k-1] #P[j,k-1]^gamma
+      logit(delta0[j,k-1]) <- delta + (z[j,k-1] * P[j,k-1])
     }
     for(i in 1:nsite){
       #connectivity [col]
       for(j in 1:nsite){
-        con[i,j,k-1] <- 1 - (delta0_ik[j,k-1] *
+        con[i,j,k-1] <- 1 - (delta0[j,k-1] *
                              exp(-alpha*dmat[i,j]) *
                              (1 - equals(i,j)))
       }
